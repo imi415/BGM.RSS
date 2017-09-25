@@ -32,6 +32,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'transmission_api', github: 'imi415/TransmissionApi', branch: 'modified-by-imi415'
 
+gem 'base32'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
