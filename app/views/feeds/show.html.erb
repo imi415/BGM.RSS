@@ -3,5 +3,9 @@
 <%= @feed.name %>
 <%= @feed.url %>
 
+<% @feed.items.each do | item | %>
+<%= item.name %>
+<% end %>
+
 <%= link_to 'Edit', edit_feed_path(@feed) %> |
 <%= link_to 'Back', feeds_path %>

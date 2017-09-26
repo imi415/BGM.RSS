@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/imi415/TransmissionApi.git
-  revision: 8065d69cfa5e6fce8d7181c95fcc6b7649284ad5
+  revision: d21809200542080284f9b5d5a358bff05daad12a
   branch: modified-by-imi415
   specs:
     transmission_api (0.0.7)
@@ -49,7 +49,7 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
-    base32 (0.3.2)
+    base_x (0.8.1)
     bcrypt (3.1.11)
     bindex (0.5.0)
     builder (3.2.3)
@@ -191,7 +191,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  base32
+  base_x
   bcrypt (~> 3.1.7)
   byebug
   capybara (~> 2.13)
