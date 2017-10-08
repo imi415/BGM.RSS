@@ -1,13 +1,4 @@
 require 'rss'
-client = TransmissionApi::Client.new(
-  :username => 'imi415',
-  :password => 'p@ssw0rd',
-  :url      => 'http://127.0.0.1:9091/transmission/rpc'
-)
-
-# p client.all
-
-# p Feed.all
 
 Feed.all.each do | feed |
   # Each feed
@@ -26,14 +17,12 @@ Feed.all.each do | feed |
     p ih
     # Save Item.
     unless (Item.find_by(:info_hash => ih))
-      # Not really create while debugging.
-      client.create item.enclosure.url
-
       i = Item.new
       i.name = item.title
       i.info_hash = ih
+      i.url = item.enclosure.url
       i.feed_id = feed.id
-      i.status = 'CREATED'
+      i.status = 'PENDING_CREATE'
       i.save
     end
   end # rss.items.each

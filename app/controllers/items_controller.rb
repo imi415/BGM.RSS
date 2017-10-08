@@ -10,6 +10,7 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @status = Marshal.load(StatCache::RedisCache::Redis.get("item_#{@item.id}_status"))
   end
 
   # GET /items/new

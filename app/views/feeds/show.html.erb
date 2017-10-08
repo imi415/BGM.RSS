@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<%= @feed.name %>
-<%= @feed.url %>
+<p><%= @feed.name %></p>
+<p><%= @feed.url %></p>
 
 <% @feed.items.each do | item | %>
-<%= item.name %>
+<p><%= item.name %></p>
 <% end %>
 
 <%= link_to 'Edit', edit_feed_path(@feed) %> |
