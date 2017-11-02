@@ -33,6 +33,8 @@ unless (status == 'SLICING')
       end
     end
     %x(#{Dir.pwd}/lib/slice.sh "#{path}" #{item.id} 1280x720 )
+    item.status = 'AVAILABLE'
+    item.save
   end
   redis.set("slice_status", 'IDLE')
   puts "Job done."
