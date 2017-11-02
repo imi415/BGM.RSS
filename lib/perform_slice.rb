@@ -17,7 +17,9 @@ unless (status == 'SLICING')
   path += '/'
   p path
 
-  Item.where(:status => 'PENDING_SLICE').first do | item |
+  item = Item.where(:status => 'PENDING_SLICE').first
+  if (item)
+    p item.id
     task = client.find(item.id)
     path += task['name']
     unless task['files'].length == 1 then
