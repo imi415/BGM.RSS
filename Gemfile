@@ -37,6 +37,8 @@ gem 'base_x'
 gem 'bencode'
 # Http client
 gem 'faraday'
+# Video processing
+gem 'streamio-ffmpeg'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

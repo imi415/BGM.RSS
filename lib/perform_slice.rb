@@ -29,12 +29,17 @@ unless (status == 'SLICING')
           path += file['name']
           break
         end
-        p path
       end
     end
     item.status = 'SLICING'
     item.save
-    %x(#{File.dirname(__FILE__)}/slice.sh "#{path}" #{slice_dir}/#{item.id} 1280x720 )
+
+    vid = FFMPEG::Movie.new("#{path}")
+    if vid.video_codec == 'h264' then
+      %x(#{File.dirname(__FILE__)}/slice_only.sh "#{path}" #{slice_dir}/#{item.id})
+    else
+      %x(#{File.dirname(__FILE__)}/slice_convert.sh "#{path}" #{slice_dir}/#{item.id} #{vid.rsolution})
+    end
     item.status = 'AVAILABLE'
     item.save
   end
