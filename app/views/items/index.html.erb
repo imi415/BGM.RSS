@@ -15,6 +15,7 @@
         <td><%= item.name %></td>
         <td><%= item.status %></td>
         <td><%= item.feed.name %></td>
+        <td><%= link_to 'Play', "//bgm.imi.moe/?name=#{item.id}"%></td>
         <td><%= link_to 'Show', item %></td>
         <td><%= link_to 'Edit', edit_item_path(item) %></td>
         <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
