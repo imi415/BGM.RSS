@@ -32,7 +32,7 @@ unless (status == 'SLICING')
         p path
       end
     end
-    %x(#{Dir.pwd}/slice.sh "#{path}" #{item.id} 1280x720 )
+    %x(#{Dir.pwd}/lib/slice.sh "#{path}" #{item.id} 1280x720 )
   end
   redis.set("slice_status", 'IDLE')
   puts "Job done."
