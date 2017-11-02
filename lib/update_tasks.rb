@@ -12,7 +12,7 @@ client.all.each do | task |
   item = Item.find_by(:info_hash => task['hashString']);
   if (item) then
     if (item.status == 'CREATED' ) then
-      item.status = task['isFinished'] ? 'PENDING_SLICE' : 'DOWNLOADING'
+      item.status = (task['percentDone'] == 1) ? 'PENDING_SLICE' : 'DOWNLOADING'
       item.save
     elsif (item.status == 'PENDING_DELETE') then
       item.status = 'DELETED'
