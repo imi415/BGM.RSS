@@ -9,16 +9,22 @@ client = TransmissionApi::Client.new(
 )
 
 client.all.each do | task |
-  item = Item.find_by(:info_hash => task['hashString']);
+  item = Item.find_by(:info_hash => task['hashString'])
+  item.taskid = task['id']
+  p task["files"].first
   if (item) then
     if (item.status == 'CREATED' ) then
       item.status = (task['percentDone'] == 1) ? 'PENDING_SLICE' : 'DOWNLOADING'
-      item.save
     elsif (item.status == 'PENDING_DELETE') then
       item.status = 'DELETED'
-      item.save
       client.destroy(task['id'], trashdata: true)
-    elsif (item.status == 'DOWNLOADING' || item.status == 'PENDING_SLICE' || item.status == 'FINISHED') then
+    elsif (item.status == 'DOWNLOADING')
+      if (task['percentDone'] == 1) then
+        item.status = 'PENDING_SLICE'
+      end
+    end
+    item.save
+    if (item.status != 'DELETED') then
       redis.set("item_#{item.id}_status", Marshal.dump(task))
     end
   end
