@@ -12,13 +12,13 @@ client.all.each do | task |
   item = Item.find_by(:info_hash => task['hashString']);
   if (item) then
     if (item.status == 'CREATED' ) then
-      item.status = task['isFinished'] ? 'FINISHED' : 'DOWNLOADING'
+      item.status = task['isFinished'] ? 'PENDING_SLICE' : 'DOWNLOADING'
       item.save
     elsif (item.status == 'PENDING_DELETE') then
       item.status = 'DELETED'
       item.save
-      task.delete;
-    elsif (item.status == 'DOWNLOADING' || item.status == 'FINISHED') then
+      client.destroy(task['id'], trashdata: true)
+    elsif (item.status == 'DOWNLOADING' || item.status == 'PENDING_SLICE' || item.status == 'FINISHED') then
       redis.set("item_#{item.id}_status", Marshal.dump(task))
     end
   end

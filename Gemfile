@@ -31,8 +31,12 @@ gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'transmission_api', github: 'imi415/TransmissionApi', branch: 'modified-by-imi415'
-
+# Dealing with magnet links
 gem 'base_x'
+# Dealing with torrents
+gem 'bencode'
+# Http client
+gem 'faraday'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
