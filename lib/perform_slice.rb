@@ -34,7 +34,7 @@ unless (status == 'SLICING')
     end
     item.status = 'SLICING'
     item.save
-    %x(#{File.dirname(__FILE__)}/slice.sh "#{path}" #{item.id} 1280x720 )
+    %x(#{File.dirname(__FILE__)}/slice.sh "#{path}" #{slice_dir}/#{item.id} 1280x720 )
     item.status = 'AVAILABLE'
     item.save
   end
