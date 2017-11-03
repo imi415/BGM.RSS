@@ -39,6 +39,12 @@ gem 'bencode'
 gem 'faraday'
 # Video processing
 gem 'streamio-ffmpeg'
+# Theming
+gem 'bootstrap-sass'
+# Theming
+gem 'bootswatch-rails'
+# jQ
+gem 'jquery-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
