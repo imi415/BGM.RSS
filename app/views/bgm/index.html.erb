@@ -1,3 +1,7 @@
-<% @bgms.each do | bgm | %>
-<%= render partial: 'card', locals: {item: bgm} %>
-<% end %>
+<div class="row">
+  <% @bgms.each do | bgm | %>
+    <div class="col-md-4 co-xl-3 col-xs-12">
+      <%= render partial: 'card', locals: {item: bgm} %>
+    </div>
+  <% end %>
+</div>

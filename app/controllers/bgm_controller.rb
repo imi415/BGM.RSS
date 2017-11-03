@@ -4,12 +4,11 @@ class BgmController < ApplicationController
     @bgms = Feed.all
   end
 
-  def bangumi(id)
+  def bangumi
 
   end
 
-  def play(id)
-
+  def play
+    @item = Item.find(params[:id])
   end
-
 end

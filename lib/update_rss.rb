@@ -12,7 +12,7 @@ Feed.all.each do | feed |
   end
 
   # Each torrent
-  rss.items.each do | item |
+  rss.items.each_with_index do | item, index |
 
     ih = ""
 
@@ -32,7 +32,8 @@ Feed.all.each do | feed |
     end
 
     # Save Item.
-    unless (Item.find_by(:info_hash => ih))
+    i = Item.find_by(:info_hash => ih)
+    unless (i)
       i = Item.new
       i.name = item.title
       i.info_hash = ih
@@ -41,6 +42,9 @@ Feed.all.each do | feed |
       i.status = 'PENDING_CREATE'
       feed.last_updated = item.pubDate
       i.save
-    end # unless
+    else # unless
+      i.ep_id = rss.items.length - index
+      i.save
+    end
   end # rss.items.each
 end # Feed.all.each
