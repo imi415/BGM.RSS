@@ -10,9 +10,9 @@ client = TransmissionApi::Client.new(
 
 client.all.each do | task |
   item = Item.find_by(:info_hash => task['hashString'])
-  item.taskid = task['id']
   p task["files"].first
   if (item) then
+    item.taskid = task['id']
     if (item.status == 'CREATED' ) then
       item.status = (task['percentDone'] == 1) ? 'PENDING_SLICE' : 'DOWNLOADING'
     elsif (item.status == 'PENDING_DELETE') then
