@@ -7,23 +7,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "No vid you say..", root_path, class: 'navbar-brand' %>
+      <%= link_to "#{fa_icon "times"}No vid you say..".html_safe, root_path, class: 'navbar-brand' %>
     </div>
-
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="<%= if current_page?(bangumi_path) then 'active' end %>"><%= link_to "Bangumi", bangumi_path %></li>
-        <li class="<%= if current_page?(feeds_path) then 'active' end %>"><%= link_to "Feeds Admin", feeds_path %></li>
+        <li class="<%= if current_page?(bangumi_path) then 'active' end %>"><%= link_to (fa_icon "film"), bangumi_path %></li>
+        <li class="<%= if current_page?(feeds_path) then 'active' end %>"><%= link_to (fa_icon "rss"), feeds_path %></li>
       </ul>
       <form class="navbar-form navbar-left" role="search" method="post">
         <div class="form-group">
-          <label for="inputEmail" class="control-label"><%= fa_icon "search" %></label>
-          <input type="text" class="form-control" placeholder="Not Available Now">
+          <input type="text" class="form-control" disabled="" placeholder="Not now...">
         </div>
-        <button type="submit" class="btn btn-default disabled">Don't Submit</button>
+        <button type="submit" class="btn btn-default disabled"><%= (fa_icon "search") %></button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Let there be login.</a></li>
+        <li class="disabled"><a href="#"><%= fa_icon "sign-in" %> Let there be login.</a></li>
       </ul>
     </div>
   </div>
