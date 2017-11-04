@@ -1,5 +1,5 @@
 <div class="row">
-  <% @bgms.each do | bgm | %>
+  <% @bgms.sort_by {| obj | obj.last_updated }.reverse.each do | bgm | %>
     <div class="col-md-4 co-xl-3 col-xs-12">
       <%= render partial: 'card', locals: {item: bgm} %>
     </div>

@@ -41,6 +41,7 @@ Feed.all.each do | feed |
       i.feed_id = feed.id
       i.status = 'PENDING_CREATE'
       feed.last_updated = item.pubDate
+      feed.save
       i.save
     else # unless
       i.ep_id = rss.items.length - index
