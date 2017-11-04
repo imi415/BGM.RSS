@@ -1,11 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<p><%= @feed.name %></p>
-<p><%= @feed.url %></p>
-
-<% @feed.items.each do | item | %>
-<p><%= item.name %></p>
-<% end %>
-
-<%= link_to 'Edit', edit_feed_path(@feed) %> |
-<%= link_to 'Back', feeds_path %>
+<div class="panel panel-info row">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= @feed.name %></h3>
+  </div>
+  <div class="panel-body">
+    <div class="well well-sm">
+      <p class="text-success"><%= @feed.url %></p>
+    </div>
+    <ul class="list-group col-md-8 col-xs-12">
+      <% @feed.items.each do | item | %>
+      <li class="list-group-item">
+        <span class="badge"><%= item.status %></span>
+        <%= item.name %>
+      </li>
+      <% end %>
+    </ul>
+    <div class="col-xs-12 col-md-4">
+      <%= link_to (fa_icon "arrow-left"), feeds_path, class: 'btn btn-primary' %>
+      <%= link_to (fa_icon "edit"), edit_feed_path(@feed), class: 'btn btn-warning' %>
+    </div>
+  </div>
+</div>

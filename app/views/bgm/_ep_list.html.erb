@@ -1,7 +1,7 @@
 <div class="list-group">
   <% item.feed.items.sort_by {| obj | obj.ep_id }.each do | ep | %>
   <a href="<%= url_for(bangumi_play_path(ep.id)) %>" class="list-group-item <%= if ep.id == item.id then 'active' end %>">
-    <h4 class="list-group-item-heading">EP #<%= ep.ep_id %></h4>
+    <h4 class="list-group-item-heading">EP #<%= ep.ep_id %> <%= if ep.id == item.id then fa_icon 'play' end %></h4>
     <p class="list-group-item-text"><%= ep.name %></p>
   </a>
   <% end %>

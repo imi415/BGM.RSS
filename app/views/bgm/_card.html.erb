@@ -3,8 +3,21 @@
     <h3 class="panel-title"><%= item.name %></h3>
   </div>
   <div class="panel-body">
-    <% item.items.sort_by {| obj | obj.ep_id }.each do | ep | %>
-    <%= link_to "EP ##{ep.ep_id}", bangumi_play_path(ep.id), class: 'btn btn-primary' %>&nbsp;
-    <% end %>
+    <div class="btn-group">
+      <% i = item.items.sort_by {| obj | obj.ep_id }.reverse %>
+      <%= link_to "#{fa_icon "play"} EP ##{i.first.ep_id}".html_safe, bangumi_play_path(i.first), class: 'btn btn-success'%>
+      <% i.delete(i.first) %>
+      <div class="btn-group">
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          Previous
+          <%= fa_icon "caret-down" %>
+        </a>
+        <ul class="dropdown-menu">
+          <% i.each do | ep | %>
+          <li><%= link_to "EP ##{ep.ep_id}".html_safe, bangumi_play_path(ep.id) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
