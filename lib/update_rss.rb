@@ -52,7 +52,7 @@ Feed.all.each do | feed |
       i.status = 'PENDING_CREATE'
       i.save
     else # unless
-      i.ep_id = rss.items.length - index - i.feed.offset.to_i
+      i.ep_id = rss.items.length - index + i.feed.offset.to_i
       i.save
     end
   end # rss.items.each
