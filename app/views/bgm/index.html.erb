@@ -1,21 +1,24 @@
-<div class="row">
-  <% bgms = @bgms.sort_by {| obj | obj.last_updated.to_date }.reverse %>
-  <% wday_array = [[],[],[],[],[],[],[]] %>
-  <% bgms.each do | bgm | %>
-    <% wday_array[bgm.last_updated.to_date.wday].push(bgm) %>
-  <% end %>
-  <% wday_array.each_with_index do | wday_bgm, idx | %>
-    <% unless wday_bgm.length == 0 %>
-    <blockquote>
-      <h3><%= fa_icon "info-circle" %> <%= Date::DAYNAMES[idx] %></h3>
-    </blockquote>
-  </div>
-  <div class="row">
+<% bgms = @bgms.sort_by {| obj | obj.last_updated.to_date }.reverse %>
+
+<% wday_array = [[],[],[],[],[],[],[]] %>
+
+<% bgms.each do | bgm | %>
+  <% wday_array[bgm.last_updated.to_date.wday].push(bgm) %>
+<% end %>
+
+<% wday_array.each_with_index do | wday_bgm, idx | %>
+  <% unless wday_bgm.length == 0 %>
+    <div class="row">
+      <blockquote>
+        <h3><%= fa_icon "info-circle" %> <%= Date::DAYNAMES[idx] %></h3>
+      </blockquote>
+    </div>
+    <div class="row">
       <% wday_bgm.each do | bgm | %>
-      <div class="col-md-4 col-xl-3 col-xs-12">
-        <%= render partial: 'card', locals: {item: bgm} %>
-      </div>
+        <div class="col-md-4 col-xl-3 col-xs-12">
+          <%= render partial: 'card', locals: {item: bgm} %>
+        </div>
       <% end %>
-    <% end %>
-    <% end %>
-</div>
+    </div>
+  <% end %>
+<% end %>
