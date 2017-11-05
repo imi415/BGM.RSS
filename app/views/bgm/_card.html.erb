@@ -3,12 +3,15 @@
     <h3 class="panel-title"><%= item.name %><span class="label label-default pull-right"><%= fa_icon "clock-o" %> <%= item.last_updated %></span></h3>
   </div>
   <div class="panel-body">
+    <div class="thumbnail">
+      <%= image_tag bangumi_cover_url(item) %>
+    </div>
     <div class="btn-group">
       <% i = item.items.sort_by {| obj | obj.ep_id }.reverse %>
-      <%= link_to "#{fa_icon "play"} EP ##{i.first.ep_id}".html_safe, bangumi_play_path(i.first), class: 'btn btn-success'%>
+      <%= link_to "#{fa_icon "play"} EP ##{i.first.ep_id}".html_safe, bangumi_play_path(i.first), class: 'btn btn-sm btn-success'%>
       <% i.delete(i.first) %>
       <div class="btn-group">
-        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <a class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
           <%= fa_icon "history" %>&nbsp;
           <%= fa_icon "caret-down" %>
         </a>

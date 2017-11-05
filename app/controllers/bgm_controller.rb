@@ -14,6 +14,6 @@ class BgmController < ApplicationController
 
   def cover
     feed = Feed.find(params[:id])
-    send_data feed.cover, type: 'image/png'
+    send_data feed.cover, type: feed.cover_type
   end
 end
