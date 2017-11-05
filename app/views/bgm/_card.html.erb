@@ -2,8 +2,9 @@
   <div class="panel-heading">
     <h3 class="panel-title">
       <%= item.name %>
+      <% est = (DateTime.now.to_date - item.last_updated.to_date).to_i %>
       <a class="btn btn-info btn-xs pull-right" data-toggle="tooltip" title="" data-placement="top" data-original-title="<%= item.last_updated %>">
-        <%= fa_icon "clock-o" %> <%= (DateTime.now.to_date - item.last_updated.to_date).to_i %> days
+        <%= fa_icon "clock-o" %> <%= est %> <%= if est > 1 then "days" else "day" end %>
       </a>
     </h3>
   </div>
