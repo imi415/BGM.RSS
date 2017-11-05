@@ -23,7 +23,7 @@
         </a>
         <ul class="dropdown-menu">
           <% i.each do | ep | %>
-          <li><%= link_to "EP ##{ep.ep_id} #{case i.first.status when "DOWNLOADING" then fa_icon "download" when "SLICING" then fa_icon "bolt" when "PENDING_SLICE" then fa_icon "bolt" end}".html_safe, bangumi_play_path(ep.id) %></li>
+          <li><%= link_to "EP ##{ep.ep_id + ep.feed.offset.to_i} #{case i.first.status when "DOWNLOADING" then fa_icon "download" when "SLICING" then fa_icon "bolt" when "PENDING_SLICE" then fa_icon "bolt" end}".html_safe, bangumi_play_path(ep.id) %></li>
           <% end %>
         </ul>
       </div>

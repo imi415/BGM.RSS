@@ -25,7 +25,10 @@ class FeedsController < ApplicationController
   # POST /feeds.json
   def create
     @feed = Feed.new(feed_params)
-
+    if feed_params[:cover] then
+      @feed.cover_type = feed_params[:cover].content_type
+      @feed.cover = feed_params[:cover].read
+    end
     respond_to do |format|
       if @feed.save
         format.html { redirect_to @feed, notice: 'Feed was successfully created.' }
@@ -42,7 +45,7 @@ class FeedsController < ApplicationController
   def update
     respond_to do |format|
       @feed.update(feed_params)
-      if @feed.cover then
+      if feed_params[:cover] then
         @feed.cover_type = feed_params[:cover].content_type
         @feed.cover = feed_params[:cover].read
       end
@@ -74,6 +77,6 @@ class FeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feed_params
-      params.fetch(:feed, {}).permit(:name, :url, :cover)
+      params.fetch(:feed, {}).permit(:name, :url, :cover, :offset)
     end
 end
