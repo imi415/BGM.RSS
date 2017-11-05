@@ -42,8 +42,10 @@ class FeedsController < ApplicationController
   def update
     respond_to do |format|
       @feed.update(feed_params)
-      @feed.cover_type = feed_params[:cover].content_type
-      @feed.cover = feed_params[:cover].read
+      if @feed.cover then
+        @feed.cover_type = feed_params[:cover].content_type
+        @feed.cover = feed_params[:cover].read
+      end
       if @feed.save
         format.html { redirect_to @feed, notice: 'Feed was successfully updated.' }
         format.json { render :show, status: :ok, location: @feed }
