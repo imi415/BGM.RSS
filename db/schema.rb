@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103115532) do
+ActiveRecord::Schema.define(version: 20171104145806) do
 
   create_table "feeds", force: :cascade do |t|
     t.string "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20171103115532) do
     t.datetime "last_updated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.binary "cover"
+    t.string "cover_type"
   end
 
   create_table "items", force: :cascade do |t|

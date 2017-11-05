@@ -26,12 +26,12 @@ Feed.all.each do | feed |
     if is_torrent then
       if !File.exist?("#{torrent_path}/#{item.title}.torrent") then
         %x(curl --globoff -s "#{URI.encode(item.enclosure.url)}" --output "#{torrent_path}/#{item.title}.torrent")
-        File.open("#{torrent_path}/#{item.title}.torrent", "r") do | f |
-          str = f.read
-          ih =  OpenSSL::Digest::SHA1.hexdigest(BEncode.load(str)["info"].bencode)
-        end
       end
       item.enclosure.url = "#{torrent_url}/#{item.title}.torrent"
+      File.open("#{torrent_path}/#{item.title}.torrent", "r") do | f |
+        str = f.read
+        ih =  OpenSSL::Digest::SHA1.hexdigest(BEncode.load(str)["info"].bencode)
+      end
     else
       magnet_ih_filter = /(magnet:\?xt=urn:btih:).*(\&dn)/
       ih = BaseX::RFC4648Base32.string_to_integer(magnet_ih_filter.match(item.enclosure.url)[0].slice(20, 32)).to_s(16)

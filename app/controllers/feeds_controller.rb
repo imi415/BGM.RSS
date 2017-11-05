@@ -41,6 +41,7 @@ class FeedsController < ApplicationController
   # PATCH/PUT /feeds/1.json
   def update
     respond_to do |format|
+      @feed.cover = feed_params[:cover].read
       if @feed.update(feed_params)
         format.html { redirect_to @feed, notice: 'Feed was successfully updated.' }
         format.json { render :show, status: :ok, location: @feed }
@@ -69,6 +70,6 @@ class FeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feed_params
-      params.fetch(:feed, {}).permit(:name, :url)
+      params.fetch(:feed, {}).permit(:name, :url, :cover)
     end
 end
