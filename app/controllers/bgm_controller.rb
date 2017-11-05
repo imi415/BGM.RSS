@@ -10,6 +10,7 @@ class BgmController < ApplicationController
 
   def play
     @item = Item.find(params[:id])
+    @status = Marshal.load(StatCache::RedisCache::Redis.get("item_#{@item.id}_status"))
   end
 
   def cover

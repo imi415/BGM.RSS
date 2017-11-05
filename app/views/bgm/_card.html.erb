@@ -14,7 +14,7 @@
     </div>
     <div class="btn-group">
       <% i = item.items.sort_by {| obj | obj.ep_id }.reverse %>
-      <%= link_to "#{fa_icon "play"} EP ##{i.first.ep_id}".html_safe, bangumi_play_path(i.first), class: 'btn btn-sm btn-success'%>
+      <%= link_to "#{fa_icon "play"} EP ##{i.first.ep_id} #{case i.first.status when "DOWNLOADING" then fa_icon "download" when "SLICING" then fa_icon "bolt" when "PENDING_SLICE" then fa_icon "bolt" end}".html_safe, bangumi_play_path(i.first), class: "btn btn-sm #{if i.first.status != 'AVAILABLE' then 'btn-warning' else 'btn-success' end}"%>
       <% i.delete(i.first) %>
       <div class="btn-group">
         <a class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -23,7 +23,7 @@
         </a>
         <ul class="dropdown-menu">
           <% i.each do | ep | %>
-          <li><%= link_to "EP ##{ep.ep_id}".html_safe, bangumi_play_path(ep.id) %></li>
+          <li><%= link_to "EP ##{ep.ep_id} #{case i.first.status when "DOWNLOADING" then fa_icon "download" when "SLICING" then fa_icon "bolt" when "PENDING_SLICE" then fa_icon "bolt" end}".html_safe, bangumi_play_path(ep.id) %></li>
           <% end %>
         </ul>
       </div>

@@ -5,12 +5,12 @@ redis = Redis.new(host: '127.0.0.1', port: 6379, db: 0)
 client = TransmissionApi::Client.new(
   :username => 'imi415',
   :password => 'p@ssw0rd',
-  :url      => 'http://127.0.0.1:9091/transmission/rpc'
+  :url      => 'http://127.0.0.1:9091/transmission/rpc',
+  :with_extra => true
 )
 
 client.all.each do | task |
   item = Item.find_by(:info_hash => task['hashString'])
-  p task["files"].first
   if (item) then
     item.taskid = task['id']
     if (item.status == 'CREATED' ) then

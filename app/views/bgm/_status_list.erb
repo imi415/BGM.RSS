@@ -1,0 +1,10 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <span class="badge"><%= Filesize.from("#{status["uploadedEver"]}B").pretty %></span>
+    <%= fa_icon "upload" %> Uploaded
+  </li>
+  <li class="list-group-item">
+    <span class="badge"><%= Filesize.from("#{status["downloadedEver"]}B").pretty %></span>
+    <%= fa_icon "download" %> Downloaded
+  </li>
+</ul>

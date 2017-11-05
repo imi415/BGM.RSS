@@ -85,6 +85,7 @@ GEM
     faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
+    filesize (0.1.1)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
     globalid (0.4.0)
@@ -219,6 +220,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   faraday
+  filesize
   font-awesome-rails
   jbuilder (~> 2.5)
   jquery-rails

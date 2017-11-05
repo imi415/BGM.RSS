@@ -47,6 +47,8 @@ gem 'bootswatch-rails'
 gem 'jquery-rails'
 # FA
 gem "font-awesome-rails"
+# Filesize
+gem "filesize"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
