@@ -6,11 +6,11 @@
   <% wday_array[bgm.last_updated.to_date.wday].push(bgm) %>
 <% end %>
 
-<% wday_array.each_with_index do | wday_bgm, idx | %>
+<% wday_array.reverse.each_with_index do | wday_bgm, idx | %>
   <% unless wday_bgm.length == 0 %>
     <div class="row">
       <blockquote>
-        <h3><%= fa_icon "info-circle" %> <%= Date::DAYNAMES[idx] %></h3>
+        <h3><%= fa_icon "info-circle" %> <%= Date::DAYNAMES[6 - idx] %></h3>
       </blockquote>
     </div>
     <div class="row">
