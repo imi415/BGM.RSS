@@ -50,6 +50,7 @@ Feed.all.each do | feed |
       i.url = item.enclosure.url
       i.feed_id = feed.id
       i.status = 'PENDING_CREATE'
+      i.ep_id = rss.items.length - index + i.feed.offset.to_i
       i.save
     else # unless
       i.ep_id = rss.items.length - index + i.feed.offset.to_i
