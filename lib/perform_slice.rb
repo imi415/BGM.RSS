@@ -47,6 +47,7 @@ unless (status == 'SLICING')
     redis.set("slice_status", 'IDLE')
     puts "Job done."
   rescue Exception  => e
+    puts e
     redis.set("slice_status", 'IDLE')
   end
 else
