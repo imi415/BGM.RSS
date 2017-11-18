@@ -1,24 +1,29 @@
 # README
+## Introducing
+* Subscribe RSS from DMHY or BANGUMI.MOE and playable via HLS.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Set up
+## Requirements
+* Ruby
+* Bundler
+* Redis
+* FFMPEG
+* Transmission
 
-Things you may want to cover:
+### What it does
 
-* Ruby version
+### Configuration
+* `bundle install`
+* Change transmission RPC information in `lib/update_tasks.rb`
+* Change transmission RPC information in `lib/perform_slice.rb`
+* Change web server hls path information in `lib/update_tasks.rb`
+* Set up cron jobs for tasks
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
+### TODO
+* Move all configuration into config/environments
+* Add Skip option for epsoide
+* Add M3U8 link for portable devices' player
+* Find someone to do front-end job for me
+* Add user and subscribe information
+* Add general torrent RSS support
 * ...
