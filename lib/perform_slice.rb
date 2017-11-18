@@ -29,9 +29,9 @@ unless (status == 'SLICING')
             path += file['name']
             break
           end
-        else
-          path += task['name']
         end
+      else
+        path += task['name']
       end
       item.status = 'SLICING'
       item.save
