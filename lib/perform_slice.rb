@@ -22,7 +22,6 @@ unless (status == 'SLICING')
     if (item)
       p item.id
       task = client.find(item.taskid)
-      path += task['name']
       unless task['files'].length == 1 then
         task['files'].each do | file |
           media_file_filter = /(\.mp4$)|(\.mkv$)|(\.ts$)/
@@ -30,6 +29,8 @@ unless (status == 'SLICING')
             path += file['name']
             break
           end
+        else
+          path += task['name']
         end
       end
       item.status = 'SLICING'
