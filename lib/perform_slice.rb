@@ -40,7 +40,7 @@ unless (status == 'SLICING')
       if vid.video_codec == 'h264' then
         %x(#{File.dirname(__FILE__)}/slice_only.sh "#{path}" #{slice_dir}/#{item.id})
       else
-        %x(#{File.dirname(__FILE__)}/slice_convert.sh "#{path}" #{slice_dir}/#{item.id} #{vid.rsolution})
+        %x(#{File.dirname(__FILE__)}/slice_convert.sh "#{path}" #{slice_dir}/#{item.id} #{vid.resolution})
       end
       item.status = 'AVAILABLE'
       item.save
