@@ -1,4 +1,4 @@
-<% bgms = @bgms.sort_by {| obj | obj.last_updated.to_date }.reverse %>
+<% bgms = @bgms.to_a.delete_if {| obj | obj.last_updated == nil}.sort_by {| obj | obj.last_updated.to_date }.reverse %>
 
 <% wday_array = [[],[],[],[],[],[],[]] %>
 
