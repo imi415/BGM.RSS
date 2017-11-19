@@ -3,7 +3,7 @@
 * Subscribe RSS from DMHY or BANGUMI.MOE and playable via HLS.
 
 ## Set up
-## Requirements
+### Requirements
 * Ruby
 * Bundler
 * Redis

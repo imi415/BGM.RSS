@@ -1,6 +1,6 @@
 /**
  * videojs-contrib-hls
- * @version 5.12.1
+ * @version 5.12.2
  * @copyright 2017 Brightcove, Inc
  * @license Apache-2.0
  */
@@ -325,6 +325,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 var _playlistLoader = require('./playlist-loader');
 
 var _playlistLoader2 = _interopRequireDefault(_playlistLoader);
+
+var _playlistJs = require('./playlist.js');
 
 var _segmentLoader = require('./segment-loader');
 
@@ -688,7 +690,7 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
 
         // If we don't have any more available playlists, we don't want to
         // timeout the request.
-        if (_this2.masterPlaylistLoader_.isLowestEnabledRendition_()) {
+        if ((0, _playlistJs.isLowestEnabledRendition)(_this2.masterPlaylistLoader_.master, _this2.masterPlaylistLoader_.media())) {
           _this2.requestOptions_.timeout = 0;
         } else {
           _this2.requestOptions_.timeout = requestTimeout;
@@ -811,7 +813,7 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
 
         // If we don't have any more available playlists, we don't want to
         // timeout the request.
-        if (_this2.masterPlaylistLoader_.isLowestEnabledRendition_()) {
+        if ((0, _playlistJs.isLowestEnabledRendition)(_this2.masterPlaylistLoader_.master, _this2.masterPlaylistLoader_.media())) {
           _this2.requestOptions_.timeout = 0;
         } else {
           _this2.requestOptions_.timeout = requestTimeout;
@@ -1252,7 +1254,7 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
         }
       }
 
-      var isFinalRendition = this.masterPlaylistLoader_.isFinalRendition_();
+      var isFinalRendition = this.masterPlaylistLoader_.master.playlists.filter(_playlistJs.isEnabled).length === 1;
 
       if (isFinalRendition) {
         // Never blacklisting this playlist because it's final rendition
@@ -1645,7 +1647,7 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
 
 exports.MasterPlaylistController = MasterPlaylistController;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ad-cue-tags":1,"./config":3,"./decrypter-worker":4,"./media-groups":6,"./playlist-loader":9,"./ranges":12,"./segment-loader":16,"./sync-controller":18,"./util/codecs.js":19,"./vtt-segment-loader":20,"videojs-contrib-media-sources/es5/codec-utils":65,"webworkify":76}],6:[function(require,module,exports){
+},{"./ad-cue-tags":1,"./config":3,"./decrypter-worker":4,"./media-groups":6,"./playlist-loader":9,"./playlist.js":11,"./ranges":12,"./segment-loader":16,"./sync-controller":18,"./util/codecs.js":19,"./vtt-segment-loader":20,"videojs-contrib-media-sources/es5/codec-utils":65,"webworkify":76}],6:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -3336,8 +3338,6 @@ var _resolveUrl2 = _interopRequireDefault(_resolveUrl);
 
 var _videoJs = (typeof window !== "undefined" ? window['videojs'] : typeof global !== "undefined" ? global['videojs'] : null);
 
-var _playlistJs = require('./playlist.js');
-
 var _m3u8Parser = require('m3u8-parser');
 
 var _m3u8Parser2 = _interopRequireDefault(_m3u8Parser);
@@ -3374,6 +3374,19 @@ var updateSegments = function updateSegments(original, update, offset) {
 };
 
 exports.updateSegments = updateSegments;
+var resolveSegmentUris = function resolveSegmentUris(segment, baseUri) {
+  if (!segment.resolvedUri) {
+    segment.resolvedUri = (0, _resolveUrl2['default'])(baseUri, segment.uri);
+  }
+  if (segment.key && !segment.key.resolvedUri) {
+    segment.key.resolvedUri = (0, _resolveUrl2['default'])(baseUri, segment.key.uri);
+  }
+  if (segment.map && !segment.map.resolvedUri) {
+    segment.map.resolvedUri = (0, _resolveUrl2['default'])(baseUri, segment.map.uri);
+  }
+};
+
+exports.resolveSegmentUris = resolveSegmentUris;
 /**
   * Returns a new master playlist that is the result of merging an
   * updated media playlist into the original version. If the
@@ -3411,15 +3424,7 @@ var updateMaster = function updateMaster(master, media) {
 
   // resolve any segment URIs to prevent us from having to do it later
   mergedPlaylist.segments.forEach(function (segment) {
-    if (!segment.resolvedUri) {
-      segment.resolvedUri = (0, _resolveUrl2['default'])(mergedPlaylist.resolvedUri, segment.uri);
-    }
-    if (segment.key && !segment.key.resolvedUri) {
-      segment.key.resolvedUri = (0, _resolveUrl2['default'])(mergedPlaylist.resolvedUri, segment.key.uri);
-    }
-    if (segment.map && !segment.map.resolvedUri) {
-      segment.map.resolvedUri = (0, _resolveUrl2['default'])(mergedPlaylist.resolvedUri, segment.map.uri);
-    }
+    resolveSegmentUris(segment, mergedPlaylist.resolvedUri);
   });
 
   // TODO Right now in the playlists array there are two references to each playlist, one
@@ -3641,51 +3646,6 @@ var PlaylistLoader = (function (_EventTarget) {
         oldRequest.onreadystatechange = null;
         oldRequest.abort();
       }
-    }
-
-    /**
-     * Returns the number of enabled playlists on the master playlist object
-     *
-     * @return {Number} number of eneabled playlists
-     */
-  }, {
-    key: 'enabledPlaylists_',
-    value: function enabledPlaylists_() {
-      return this.master.playlists.filter(_playlistJs.isEnabled).length;
-    }
-
-    /**
-     * Returns whether the current playlist is the lowest rendition
-     *
-     * @return {Boolean} true if on lowest rendition
-     */
-  }, {
-    key: 'isLowestEnabledRendition_',
-    value: function isLowestEnabledRendition_() {
-      if (this.master.playlists.length === 1) {
-        return true;
-      }
-
-      var currentBandwidth = this.media().attributes.BANDWIDTH || Number.MAX_VALUE;
-
-      return this.master.playlists.filter(function (playlist) {
-        if (!(0, _playlistJs.isEnabled)(playlist)) {
-          return false;
-        }
-
-        return (playlist.attributes.BANDWIDTH || 0) < currentBandwidth;
-      }).length === 0;
-    }
-
-    /**
-     * Returns whether the current playlist is the final available rendition
-     *
-     * @return {Boolean} true if on final rendition
-     */
-  }, {
-    key: 'isFinalRendition_',
-    value: function isFinalRendition_() {
-      return this.master.playlists.filter(_playlistJs.isEnabled).length === 1;
     }
 
     /**
@@ -3948,7 +3908,7 @@ var PlaylistLoader = (function (_EventTarget) {
 
 exports['default'] = PlaylistLoader;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./playlist.js":11,"./resolve-url":15,"global/window":32,"m3u8-parser":33}],10:[function(require,module,exports){
+},{"./resolve-url":15,"global/window":32,"m3u8-parser":33}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -4925,6 +4885,28 @@ var estimateSegmentRequestTime = function estimateSegmentRequestTime(segmentDura
 };
 
 exports.estimateSegmentRequestTime = estimateSegmentRequestTime;
+/*
+ * Returns whether the current playlist is the lowest rendition
+ *
+ * @return {Boolean} true if on lowest rendition
+ */
+var isLowestEnabledRendition = function isLowestEnabledRendition(master, media) {
+  if (master.playlists.length === 1) {
+    return true;
+  }
+
+  var currentBandwidth = media.attributes.BANDWIDTH || Number.MAX_VALUE;
+
+  return master.playlists.filter(function (playlist) {
+    if (!isEnabled(playlist)) {
+      return false;
+    }
+
+    return (playlist.attributes.BANDWIDTH || 0) < currentBandwidth;
+  }).length === 0;
+};
+
+exports.isLowestEnabledRendition = isLowestEnabledRendition;
 // exports
 exports['default'] = {
   duration: duration,
@@ -4939,7 +4921,8 @@ exports['default'] = {
   isAes: isAes,
   isFmp4: isFmp4,
   hasAttribute: hasAttribute,
-  estimateSegmentRequestTime: estimateSegmentRequestTime
+  estimateSegmentRequestTime: estimateSegmentRequestTime,
+  isLowestEnabledRendition: isLowestEnabledRendition
 };
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"global/window":32}],12:[function(require,module,exports){
@@ -13541,8 +13524,8 @@ ElementaryStream = function() {
       parsePes(packetData, event);
 
       // non-video PES packets MUST have a non-zero PES_packet_length
-      // check that they match before we do a flush
-      packetFlushable = type === 'video' || event.packetLength === stream.size;
+      // check that there is enough stream data to fill the packet
+      packetFlushable = type === 'video' || event.packetLength <= stream.size;
 
       // flush pending packets if the conditions are right
       if (forceFlush || packetFlushable) {
