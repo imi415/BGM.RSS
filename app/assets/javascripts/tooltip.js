@@ -5,7 +5,7 @@
 //  $('[data-toggle="tooltip"]').tooltip()
 //})
 
-$(document).on("ready page:change", function() {
+$(document).on("turbolinks:load", function() {
   $("[data-toggle='tooltip']")
     .tooltip("destroy")
     .tooltip();
