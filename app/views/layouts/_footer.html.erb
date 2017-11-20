@@ -1,3 +1,9 @@
 <div class="well">
-  <span>System: <%= RUBY_PLATFORM %> / Ruby: <%= RUBY_VERSION %> rev<%= RUBY_REVISION %> / Rails: <%= Rails::VERSION::STRING %> / Client: <%= request.remote_ip %></span>
+  <span>
+    Commit: <%= link_to APP_Version, "https://github.com/imi415/BGM.RSS/commit/#{APP_Version}" %> /
+    System: <%= RUBY_PLATFORM %> /
+    Ruby: <%= RUBY_VERSION %> rev.<%= RUBY_REVISION %> /
+    Rails: <%= Rails::VERSION::STRING %> /
+    Client: <%= request.remote_ip %>
+  </span>
 </div>
