@@ -15,4 +15,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require videojs/_video
+//= require videojs/videojs.hotkeys
+//= require videojs/videojs-user
 //= require_tree .
