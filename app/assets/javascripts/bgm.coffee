@@ -5,6 +5,10 @@
 change = ->
         for player in document.getElementsByClassName 'video-js'
             video = videojs(player)
+            video.hotkeys
+              volumeStep: 0.1
+              seekStep: 5
+              enableModifiersForNumbers: false
 
 
     before_load = ->
