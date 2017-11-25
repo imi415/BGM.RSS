@@ -5,7 +5,7 @@ Feed.all.each do | feed |
   rss = RSS::Parser.parse(feed.url, true)
 
   torrent_path = '/var/www/html/torrents'
-  torrent_url = 'https://bgm.imi.moe/torrents'
+  torrent_url = 'https://bgm.npi.x86.work/torrents'
 
   torrent_filter = /bangumi\.moe/
   is_torrent = false
