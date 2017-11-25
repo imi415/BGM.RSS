@@ -5,7 +5,5 @@ $(document).ready(function(){
 			seekStep: 5,
 			enableModifiersForNumbers: false
 		});
-		this.overlay();
 	});
-
 });
