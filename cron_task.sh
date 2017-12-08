@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source .env
+source $1/.env
 
 echo $RAILS_ENV
 
