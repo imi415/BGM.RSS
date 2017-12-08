@@ -1,14 +1,14 @@
-redis = Redis.new(host: config.x.redis_host, port: config.x.redis_port, db: config.x.redis_db)
+redis = Redis.new(host: Rails.configuration.x.redis_host, port: Rails.configuration.x.redis_port, db: Rails.configuration.x.redis_db)
 
 status = redis.get("slice_status")
 
 client = TransmissionApi::Client.new(
-  :username => config.x.transmission_user,
-  :password => config.x.transmission_password,
-  :url      => config.x.transmission_url
+  :username => Rails.configuration.x.transmission_user,
+  :password => Rails.configuration.x.transmission_password,
+  :url      => Rails.configuration.x.transmission_url
 )
 
-slice_dir = config.x.slice_dir
+slice_dir = Rails.configuration.x.slice_dir
 
 unless (status == 'SLICING')
   begin

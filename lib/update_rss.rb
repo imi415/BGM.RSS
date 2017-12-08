@@ -4,8 +4,8 @@ Feed.all.each do | feed |
   # Each feed
   rss = RSS::Parser.parse(feed.url, true)
 
-  torrent_path = config.x.torrent_path
-  torrent_url = config.x.torrent_url
+  torrent_path = Rails.configuration.x.torrent_path
+  torrent_url = Rails.configuration.x.torrent_url
 
   torrent_filter = /bangumi\.moe/
   is_torrent = false
