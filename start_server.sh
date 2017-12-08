@@ -4,9 +4,8 @@ source .env
 
 echo $RAILS_ENV
 
-if [ $RAILS_ENV -eq "production" ]; then
-	export SECRET_KEY_BASE=`bin/rake secret`
-fi
+export SECRET_KEY_BASE=`bin/rake secret`
+
 
 echo $TRANSMISSION_URL
 echo $REDIS_HOST
