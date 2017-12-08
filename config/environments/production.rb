@@ -88,4 +88,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.x.transmission_url = ENV['TRANSMISSION_URL']
+  config.x.transmission_user = ENV['TRANSMISSION_USER']
+  config.x.transmission_password = ENV['TRANSMISSION_PASSWORD']
+
+  config.x.redis_host = ENV['REDIS_HOST']
+  config.x.redis_port = ENV['REDIS_PORT'].to_i
+  config.x.redis_db = ENV['REDIS_DB'].to_i
+
+  config.x.slice_dir = ENV['SLICE_DIR']
+  config.x.torrent_path = ENV['TORRENT_PATH']
+  config.x.torrent_url = ENV['TORRENT_URL']
 end

@@ -51,4 +51,17 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.x.transmission_url = 'http://127.0.0.1:9091/transmission/rpc'
+  config.x.transmission_user = 'imi415'
+  config.x.transmission_password = 'p@ssw0rd'
+
+  config.x.redis_host = '127.0.0.1'
+  config.x.redis_port = 6379
+  config.x.redis_db = 0
+
+  config.x.slice_dir = '/var/www/html/hls'
+  config.x.torrent_path = '/var/www/html/torrents'
+  config.x.torrent_url = 'https://bgm.x86.work/torrents'
+
 end

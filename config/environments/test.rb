@@ -39,4 +39,17 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.x.transmission_url = 'http://127.0.0.1:9091/transmission/rpc'
+  config.x.transmission_user = 'imi415'
+  config.x.transmission_password = 'p@ssw0rd'
+
+  config.x.redis_host = '127.0.0.1'
+  config.x.redis_port = 6379
+  config.x.redis_db = 0
+
+  config.x.slice_dir = '/var/www/html/hls'
+  config.x.torrent_path = '/var/www/html/torrents'
+  config.x.torrent_url = 'https://bgm.x86.work/torrents'
+
 end

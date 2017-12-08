@@ -1,14 +1,14 @@
-redis = Redis.new(host: '127.0.0.1', port: 6379, db: 0)
+redis = Redis.new(host: config.x.redis_host, port: config.x.redis_port, db: config.x.redis_db)
 
 status = redis.get("slice_status")
 
 client = TransmissionApi::Client.new(
-  :username => 'imi415',
-  :password => 'p@ssw0rd',
-  :url      => 'http://127.0.0.1:9091/transmission/rpc'
+  :username => config.x.transmission_user,
+  :password => config.x.transmission_password,
+  :url      => config.x.transmission_url
 )
 
-slice_dir = '/var/www/html/hls'
+slice_dir = config.x.slice_dir
 
 unless (status == 'SLICING')
   begin

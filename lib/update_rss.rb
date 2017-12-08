@@ -4,8 +4,8 @@ Feed.all.each do | feed |
   # Each feed
   rss = RSS::Parser.parse(feed.url, true)
 
-  torrent_path = '/var/www/html/torrents'
-  torrent_url = 'https://bgm.npi.x86.work/torrents'
+  torrent_path = config.x.torrent_path
+  torrent_url = config.x.torrent_url
 
   torrent_filter = /bangumi\.moe/
   is_torrent = false
