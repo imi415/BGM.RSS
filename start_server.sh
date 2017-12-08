@@ -12,4 +12,4 @@ echo $TRANSMISSION_URL
 echo $REDIS_HOST
 echo $SLICE_DIR
 
-bin/rails s -d
+bin/rails s -d -b $LISTEN_HOST -p $LISTEN_PORT
