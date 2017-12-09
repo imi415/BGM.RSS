@@ -5,7 +5,7 @@ class BgmController < ApplicationController
   end
 
   def bangumi
-
+    @feed = Feed.find(params[:id])
   end
 
   def play
