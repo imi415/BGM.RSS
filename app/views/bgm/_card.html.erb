@@ -10,7 +10,9 @@
   </div>
   <div class="panel-body">
     <div class="thumbnail">
-      <%= image_tag bangumi_cover_url(item) %>
+      <a href="<%= url_for bgm_show_path %>" class="thumbnail">
+        <%= image_tag bangumi_cover_url(item) %>
+      </a>
     </div>
     <div class="btn-group">
       <% i = item.items.sort_by {| obj | obj.ep_id }.reverse %>
