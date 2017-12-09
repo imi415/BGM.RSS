@@ -9,11 +9,9 @@
     </h3>
   </div>
   <div class="panel-body">
-    <div class="thumbnail">
-      <a href="<%= url_for bangumi_show_path(item) %>" class="thumbnail">
-        <%= image_tag bangumi_cover_url(item) %>
-      </a>
-    </div>
+    <a href="<%= url_for bangumi_show_path(item) %>" class="thumbnail">
+      <%= image_tag bangumi_cover_url(item) %>
+    </a>
     <div class="btn-group">
       <% i = item.items.sort_by {| obj | obj.ep_id }.reverse %>
       <%= link_to "#{fa_icon "play"} EP ##{i.first.ep_id} #{case i.first.status when "DOWNLOADING" then fa_icon "download" when "SLICING" then fa_icon "bolt" when "PENDING_SLICE" then fa_icon "bolt" end}".html_safe, bangumi_play_path(i.first), class: "btn btn-sm #{if i.first.status != 'AVAILABLE' then 'btn-warning' else 'btn-success' end}"%>
