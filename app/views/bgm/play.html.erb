@@ -16,4 +16,7 @@
   <div class="col-xs-12 col-md-3">
     <%= render partial: 'status_list', locals: {status: @status} %>
   </div>
+  <div class="col-xs-12 col-md-3">
+    <%= link_to fa_icon('external-link') + ' Local Player', "/hls/#{@item.id}.m3u8", class: "btn btn-info" %>
+  </div>
 </div>
