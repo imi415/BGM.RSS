@@ -17,6 +17,7 @@
       <tr>
         <td><%= feed.name %></td>
         <td><%= feed.url %></td>
+        <td><%= feed.is_finished %></td>
         <td>
           <%= link_to (fa_icon "check"), feed, class: 'btn btn-info' %>
           <%= link_to (fa_icon "edit"), edit_feed_path(feed), class: 'btn btn-warning' %>

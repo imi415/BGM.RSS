@@ -1,6 +1,6 @@
 require 'rss'
 
-Feed.all.each do | feed |
+Feed.where(:is_finished => false).each do | feed |
   # Each feed
   rss = RSS::Parser.parse(feed.url, true)
 

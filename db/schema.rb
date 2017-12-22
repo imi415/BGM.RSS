@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128052010) do
+ActiveRecord::Schema.define(version: 20171222153306) do
 
   create_table "feeds", force: :cascade do |t|
     t.string "name"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 20171128052010) do
     t.binary "cover"
     t.string "cover_type"
     t.integer "offset"
+    t.integer "total_ep_count"
+    t.boolean "is_finished"
+    t.boolean "auto_finish"
   end
 
   create_table "items", force: :cascade do |t|

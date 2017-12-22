@@ -36,6 +36,24 @@
       </div>
     </div>
     <div class="form-group">
+      <%= form.label :is_finished, class: 'col-lg-2 control-label' %>
+      <div class="col-lg-10">
+        <%= form.check_box :is_finished, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= form.label :total_ep_count, class: 'col-lg-2 control-label' %>
+      <div class="col-lg-10">
+        <%= form.number_field :total_ep_count, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= form.label :auto_finish, class: 'col-lg-2 control-label' %>
+      <div class="col-lg-10">
+        <%= form.check_box :auto_finish, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
         <%= form.submit "Confirm", class: 'btn btn-info' %>
       </div>
