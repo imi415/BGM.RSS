@@ -8,4 +8,4 @@ echo $TRANSMISSION_URL
 echo $REDIS_HOST
 echo $SLICE_DIR
 
-$1/bin/rails runner $2
+$1/bin/rails runner $1/lib/$2.rb
