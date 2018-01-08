@@ -4,7 +4,16 @@ class FeedsController < ApplicationController
   # GET /feeds
   # GET /feeds.json
   def index
-    @feeds = Feed.all
+    if (params[:show_finished] == "true") then
+      session[:hide_finished_feeds] = false
+    elsif (params[:show_finished] == "false") then
+      session[:hide_finished_feeds] = true
+    end
+    if (session[:hide_finished_feeds]) then
+      @feeds = Feed.where(:is_finished => false)
+    else
+      @feeds = Feed.all
+    end
   end
 
   # GET /feeds/1

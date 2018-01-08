@@ -1,5 +1,5 @@
 <% bgms = @bgms.to_a.delete_if {| obj | obj.last_updated == nil}.sort_by {| obj | obj.last_updated.to_date }.reverse %>
-<div class="row">
+<div class="row-fluid">
   <% bgms.each do | bgm | %>
     <div class="col-xs-12 col-sm-3">
       <%= render partial: 'card', locals: {item: bgm} %>
