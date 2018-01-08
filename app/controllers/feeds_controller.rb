@@ -10,7 +10,7 @@ class FeedsController < ApplicationController
       session[:hide_finished_feeds] = true
     end
     if (session[:hide_finished_feeds]) then
-      @feeds = Feed.where(:is_finished => false)
+      @feeds = Feed.where(:is_finished => false).order_by(:created_at => :desc)
     else
       @feeds = Feed.all
     end
