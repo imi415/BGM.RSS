@@ -4,6 +4,10 @@ class BgmController < ApplicationController
     @bgms = Feed.all
   end
 
+  def timeline
+    @bgms = Feed.where(:is_finished => false)
+  end
+
   def bangumi
     @feed = Feed.find(params[:id])
   end

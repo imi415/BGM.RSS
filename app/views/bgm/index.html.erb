@@ -1,24 +1,8 @@
 <% bgms = @bgms.to_a.delete_if {| obj | obj.last_updated == nil}.sort_by {| obj | obj.last_updated.to_date }.reverse %>
-
-<% wday_array = [[],[],[],[],[],[],[]] %>
-
-<% bgms.each do | bgm | %>
-  <% wday_array[bgm.last_updated.to_date.wday].push(bgm) %>
-<% end %>
-
-<% wday_array.each_with_index do | wday_bgm, idx | %>
-  <% unless wday_bgm.length == 0 %>
-    <div class="row">
-      <blockquote>
-        <h3><%= fa_icon "info-circle" %> <%= Date::DAYNAMES[idx] %></h3>
-      </blockquote>
-    </div>
-    <div class="row">
-      <% wday_bgm.each do | bgm | %>
-        <div class="col-xs-12 col-sm-3">
-          <%= render partial: 'card', locals: {item: bgm} %>
-        </div>
-      <% end %>
+<div class="row">
+  <% bgms.each do | bgm | %>
+    <div class="col-xs-12 col-sm-3">
+      <%= render partial: 'card', locals: {item: bgm} %>
     </div>
   <% end %>
-<% end %>
+</div>
