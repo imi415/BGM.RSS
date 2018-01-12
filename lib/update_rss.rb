@@ -42,7 +42,7 @@ Feed.where(:is_finished => false).each do | feed |
     end
 
     # Save Item.
-    i = Item.find_by(:info_hash => ih)
+    i = Item.where(:skip => false)find_by(:info_hash => ih)
     unless (i)
       i = Item.new
       i.name = item.title
@@ -52,9 +52,12 @@ Feed.where(:is_finished => false).each do | feed |
       i.status = 'PENDING_CREATE'
       i.ep_id = rss.items.length - index + i.feed.offset.to_i
       i.save
+
     else # unless
       i.ep_id = rss.items.length - index + i.feed.offset.to_i
       i.save
     end
   end # rss.items.each
+  feed.amount = feed.items.delete_if{| item | item.skip == true}.length
+  feed.save
 end # Feed.all.each
