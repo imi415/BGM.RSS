@@ -42,7 +42,7 @@ Feed.where(:is_finished => false).each do | feed |
     end
 
     # Save Item.
-    i = Item.where(:skip => false)find_by(:info_hash => ih)
+    i = Item.find_by(:info_hash => ih)
     unless (i)
       i = Item.new
       i.name = item.title
