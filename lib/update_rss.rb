@@ -20,7 +20,7 @@ Feed.where(:is_finished => false).each do | feed |
 
   # Each torrent
 
-  if feed.item != nil then
+  if rss.items != nil then
     rss.items.each_with_index do | item, index |
       ih = ""
       if is_torrent then
