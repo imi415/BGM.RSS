@@ -9,6 +9,7 @@
     <tr>
       <th>Name</th>
       <th>URL</th>
+      <th>Status</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -16,8 +17,12 @@
     <% @feeds.each do |feed| %>
       <tr>
         <td><%= feed.name %></td>
-        <td><%= feed.url %></td>
-        <td><%= feed.is_finished %></td>
+        <td><%= feed.url.truncate(15) %></td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar progress-bar-info" style="width: <%= "#{feed.amount / feed.total_ep_count}" %>"></div>
+          </div>
+        </td>
         <td>
           <%= link_to (fa_icon "check"), feed, class: 'btn btn-info' %>
           <%= link_to (fa_icon "edit"), edit_feed_path(feed), class: 'btn btn-warning' %>
