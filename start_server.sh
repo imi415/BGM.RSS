@@ -11,4 +11,5 @@ echo $TRANSMISSION_URL
 echo $REDIS_HOST
 echo $SLICE_DIR
 
+bin/bundle exec sidekiq -d -L log/sidekiq.log
 bin/rails s -d -b $LISTEN_HOST -p $LISTEN_PORT
