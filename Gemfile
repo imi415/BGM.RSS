@@ -49,6 +49,10 @@ gem 'jquery-rails'
 gem "font-awesome-rails"
 # Filesize
 gem "filesize"
+# Sidekiq cron job
+gem "sidekiq"
+gem "sidekiq-cron", "~> 0.6.3"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

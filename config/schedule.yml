@@ -1,0 +1,13 @@
+update_rss_job:
+  cron: "0 * * * *"
+  class: "UpdateRssWorker"
+  queue: main_queue
+
+update_tasks_job:
+  cron: "*/5 * * * *"
+  class: "UpdateTasksWorker"
+  queue: main_queue
+perform_slice_job:
+  cron: "*/2 * * * *"
+  class: "PerformSliceWorker"
+  queue: main_queue

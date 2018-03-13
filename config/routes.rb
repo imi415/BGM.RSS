@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   get '/ep/:id', to: 'bgm#play', as: 'bangumi_play'
   get '/cover/:id', to: 'bgm#cover', as: 'bangumi_cover'
 
+
+  get '/tasks', to: 'cron_task#index', as: 'cron_task_index'
+  get '/tasks/:name/enqueue', to: 'cron_task#enqueue', as: 'cton_task_enqueue'
 end
