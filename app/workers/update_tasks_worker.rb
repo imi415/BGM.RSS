@@ -35,10 +35,10 @@ class UpdateTasksWorker
       end
     }
     # transmissionにタスクを追加
-    Item.where(status: 'PENDING_CREATE').each do |item|
+    Item.where(status: 'PENDING_CREATE').find_each {| item |
       client.create item.url
       item.status = 'CREATED'
       item.save
-    end
+    }
   end
 end
