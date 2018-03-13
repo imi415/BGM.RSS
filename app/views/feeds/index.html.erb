@@ -20,7 +20,7 @@
         <td><%= feed.url.truncate(15) %></td>
         <td>
           <div class="progress">
-            <div class="progress-bar progress-bar-info" style="width: <%= "#{feed.amount / feed.total_ep_count}" %>"></div>
+            <div class="progress-bar progress-bar-info" style="width: <%= "#{feed.amount.to_f / feed.total_ep_count.to_f}" %>"></div>
           </div>
         </td>
         <td>
