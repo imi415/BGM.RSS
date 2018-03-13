@@ -12,5 +12,7 @@ Rails.application.routes.draw do
 
 
   get '/tasks', to: 'cron_task#index', as: 'cron_task_index'
-  get '/tasks/:name/enqueue', to: 'cron_task#enqueue', as: 'cton_task_enqueue'
+  get '/tasks/:name/enqueue', to: 'cron_task#enqueue', as: 'cron_task_enqueue'
+  get '/tasks/:name/toggle', to: 'cron_task#toggle', as: 'cron_task_toggle'
+
 end

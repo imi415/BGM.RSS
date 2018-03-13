@@ -11,6 +11,7 @@ class CronTaskController < ApplicationController
         else
           job.enable!
         end
+        redirect_to action: "index"
     end
 
     def enqueue
