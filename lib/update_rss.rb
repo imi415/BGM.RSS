@@ -58,7 +58,7 @@ Feed.where(:is_finished => false).each do | feed |
         i.save
       end
     end # rss.items.each
-    feed.amount = feed.items.delete_if{| item | item.skip == true}.length
+    feed.amount = feed.items.where(:skip => false).length
     feed.save
     end # Feed.all.each
   end
