@@ -3,6 +3,7 @@ class UpdateTasksWorker
   include Sidekiq::Worker
 
   def perform(*_args)
+    GC.start
     ActiveRecord::Base.uncached do
       redis = Redis.new(host: Rails.configuration.x.redis_host, port: Rails.configuration.x.redis_port, db: Rails.configuration.x.redis_db)
       client = TransmissionApi::Client.new(
