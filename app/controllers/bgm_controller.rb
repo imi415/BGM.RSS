@@ -1,7 +1,7 @@
 class BgmController < ApplicationController
 
   def index
-    @bgms = Feed.where(:is_enabled => true)
+    @bgms = Feed.all
   end
 
   def timeline
