@@ -51,7 +51,7 @@ gem "font-awesome-rails"
 gem "filesize"
 # Sidekiq cron job
 gem "sidekiq"
-gem "sidekiq-cron", "~> 0.6.3"
+gem "sidekiq-cron", "~> 1.0.4"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
