@@ -13,6 +13,13 @@ class BgmController < ApplicationController
   end
 
   def play
+    stat_str = StatCache::RedisCache::Redis.get("item_#{@item.id}_status")
+    @status = {}
+    @status["uploadedEver"] = 0
+    @status["downloadedEver"] = 0
+    if !stat_str.nil? then
+      @status = Marshal.load(StatCache::RedisCache::Redis.get("item_#{@item.id}_status"))
+    end
     @item = Item.find(params[:id])
     @status = Marshal.load(StatCache::RedisCache::Redis.get("item_#{@item.id}_status"))
   end
