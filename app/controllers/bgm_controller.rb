@@ -23,8 +23,6 @@ class BgmController < ApplicationController
     if !stat_str.nil? then
       @status = Marshal.load(StatCache::RedisCache::Redis.get("item_#{@item.id}_status"))
     end
-
-    @status = Marshal.load(StatCache::RedisCache::Redis.get("item_#{@item.id}_status"))
   end
 
   def cover
